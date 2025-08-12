@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Advanced Scrolling Portfolio</title>
+    
+    <!-- Google Font for a clean, professional look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* CSS to create the clean, animated design */
+        :root {
+            --bg-color: #f0f4f8;
+            --second-bg-color: #ffffff;
+            --text-color: #334e68;
+            --accent-color: #48a9a6;
+            --footer-bg: #e2e6ea;
+            --link-color: #334e68;
+        }
+
+        /* Dark Mode theme */
+        body[data-theme='dark'] {
+            --bg-color: #1a202c;
+            --second-bg-color: #2d3748;
+            --text-color: #e2e8f0;
+            --accent-color: #63b3ed;
+            --footer-bg: #11151a;
+            --link-color: #e2e8f0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            text-decoration: none;
+            outline: none;
+            border: none;
+            scroll-behavior: smooth;
+        }
+
+        html {
+            font-size: 62.5%;
+            overflow-x: hidden;
+        }
+
+        body {
+            background: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+
+        section {
+            min-height: 100vh;
+            padding: 10rem 9% 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        /* Header & Navigation */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 2rem 9%;
+            background: var(--second-bg-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: background-color 0.5s ease;
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            color: var(--text-color);
+            font-weight: 700;
+        }
+
+        .navbar a {
+            font-size: 1.7rem;
+            color: var(--text-color);
+            font-weight: 500;
+            margin-left: 3.5rem;
+            transition: color 0.3s ease;
+            border-bottom: 2px solid transparent;
+            padding-bottom: 0.5rem;
+        }
+
+        .navbar a:hover,
+        .navbar a.active {
+            color: var(--accent-color);
+            border-bottom-color: var(--accent-color);
+        }
+
+        .theme-toggle {
+            cursor: pointer;
+            font-size: 2.5rem;
+            color: var(--text-color);
+            margin-left: 2rem;
+            transition: color 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            color: var(--accent-color);
+        }
+        
+        .container {
+            max-width: 1000px;
+            width: 100%;
+        }
+
+        /* Home Section */
+        #home {
+            background: linear-gradient(135deg, var(--bg-color) 0%, var(--second-bg-color) 100%);
+        }
+        
+        .hero-content h1 {
+            font-size: 6rem;
+            font-weight: 700;
+            line-height: 1.2;
+            color: var(--text-color);
+        }
+        
+        .hero-content h1 span {
+            color: var(--accent-color);
+        }
+        
+        .animated-text {
+            font-size: 3rem;
+            font-weight: 500;
+            color: var(--text-color);
+            margin-top: 1rem;
+            min-height: 40px; /* Prevents layout shift */
+        }
+
+        .animated-text span {
+            color: var(--accent-color);
+            position: relative;
+        }
+
+        @keyframes typing {
+            0%, 20% { content: 'Developer'; }
+            21%, 40% { content: 'Designer'; }
+            41%, 60% { content: 'Problem Solver'; }
+            
+        }
+
+        .animated-text span::after {
+            content: '';
+            animation: typing 10s infinite;
+        }
+        
+        .hero-content p {
+            font-size: 1.8rem;
+            margin-top: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* About Section */
+        #about {
+            background-color: var(--second-bg-color);
+        }
+        
+        .about-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4rem;
+            text-align: left;
+        }
+        
+        .about-img img {
+            width: 300px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .about-text {
+            max-width: 500px;
+        }
+        
+        .about-text p {
+            font-size: 1.6rem;
+            margin-top: 1rem;
+        }
+
+        /* Skills Section */
+        #skills {
+            background-color: var(--bg-color);
+        }
+        
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 3rem;
+            text-align: center;
+        }
+        
+        .skill-item {
+            background: var(--second-bg-color);
+            padding: 3rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .skill-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        
+        .skill-item i {
+            font-size: 6rem;
+            color: var(--accent-color);
+        }
+        
+        .skill-item h3 {
+            font-size: 2rem;
+            margin-top: 1rem;
+        }
+
+        /* Projects Section */
+        #projects {
+            background-color: var(--second-bg-color);
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+        
+        .project-card {
+            background: var(--bg-color);
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .project-card:hover {
+            transform: scale(1.03);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        
+        .project-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .project-content {
+            padding: 2rem;
+            text-align: left;
+        }
+        
+        .project-content h3 {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .project-content p {
+            font-size: 1.6rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 4rem 9%;
+            background-color: var(--footer-bg);
+            text-align: center;
+            font-size: 1.6rem;
+            color: var(--link-color);
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+        
+        .footer .social-media {
+            margin-bottom: 2rem;
+        }
+        
+        .footer .social-media a {
+            font-size: 2.5rem;
+            margin: 0 1rem;
+            color: var(--link-color);
+            transition: color 0.3s ease;
+        }
+        
+        .footer .social-media a:hover {
+            color: var(--accent-color);
+        }
+        
+        /* Scroll Reveal Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(80px);
+            transition: opacity 1s ease, transform 1s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 991px) {
+            html {
+                font-size: 55%;
+            }
+            .about-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            .about-text {
+                margin-top: 2rem;
+            }
+        }
+    </style>
+</head>
+<body data-theme="light">
+
+    <!-- Header Section -->
+    <header class="header">
+        <a href="#" class="logo">Kaviya Akshaya </a>
+        <nav class="navbar">
+            <a href="#home" class="active">Home</a>
+            <a href="#about">About</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+        </nav>
+        <div id="theme-toggle" class="theme-toggle">
+            <i class="fas fa-moon"></i>
+        </div>
+    </header>
+
+    <!-- Home Section -->
+    <section id="home">
+        <div class="container hero-content" data-scroll-reveal>
+            <h1>Hi, I'm <span>Kaviya Akshaya </span></h1>
+            <p class="animated-text">I'm a <span></span></p>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <h2 class="heading" data-scroll-reveal>About <span>Me</span></h2>
+        <div class="container about-content">
+            <div class="about-img" data-scroll-reveal>
+                <img src="https://placehold.co/300x300/f0f4f8/48a9a6?text=Your+Photo" alt="Your Photo">
+            </div>
+            <div class="about-text" data-scroll-reveal>
+                <p>
+                    I am a final-year BCA student at G. Venkataswamy Naidu College and currently pursuing a full-stack internship at Avaami Technologies. I am maintaining an academic score of 80% and possess strong knowledge of programming languages and design skills.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <h2 class="heading" data-scroll-reveal>My <span>Skills</span></h2>
+        <div class="container skills-grid">
+            <div class="skill-item" data-scroll-reveal>
+                <i class="fab fa-react"></i>
+                <h3>React</h3>
+            </div>
+            <div class="skill-item" data-scroll-reveal>
+                <i class="fab fa-node-js"></i>
+                <h3>Canva</h3>
+            </div>
+            <div class="skill-item" data-scroll-reveal>
+                <i class="fab fa-html5"></i>
+                <h3>HTML</h3>
+            </div>
+            <div class="skill-item" data-scroll-reveal>
+                <i class="fab fa-css3-alt"></i>
+                <h3>Java</h3>
+            </div>
+            <div class="skill-item" data-scroll-reveal>
+                <i class="fab fa-js-square"></i>
+                <h3>JavaScript</h3>
+            </div>
+            <div class="skill-item" data-scroll-reveal>
+                <i class="fab fa-git-alt"></i>
+                <h3>Firebase</h3>
+            </div>
+             <div class="skill-item" data-scroll-reveal>
+                <i class="fab fa-git-alt"></i>
+                <h3>Wix</h3>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <h2 class="heading" data-scroll-reveal>My <span>Projects</span></h2>
+        <div class="container projects-grid">
+            <div class="project-card" data-scroll-reveal>
+                <img src="https://placehold.co/400x200/ffffff/48a9a6?text=Project+1" alt="Project 1">
+                <div class="project-content">
+                    <h3>Business Connect</h3>
+                    <p>
+                        Business Connect is a modern web platform that connects individuals, small businesses, and local organizations for job postings, ads, and professional networking. Designed for all users, it offers an easy-to-use interface with secure Firebase Authentication (email/password or Google). Users can create and update profiles with details like About, Experience, Education, Skills, and resumes, plus customize banners and photos. Job and ad posts update in real-time via Firebase Firestore. Built with React.js for a responsive, modular UI and powered by Firebase for backend services, Business Connect is a scalable, lightweight tool for building professional identity and discovering opportunities across all sectors.
+                    </p>
+                </div>
+            </div>
+            <div class="project-card" data-scroll-reveal>
+                <img src="https://placehold.co/400x200/ffffff/48a9a6?text=Project+2" alt="Project 2">
+                <div class="project-content">
+                    <h3>Image Processing and Analysis System</h3>
+                    <p>
+                        The proposed system is an Image Processing and Analysis System that demonstrates the application of multiple image processing techniques in a single platform. The system takes an input image and processes it using methods such as grayscale conversion, thresholding, edge detection, Gaussian blurring, and histogram equalization. Each processed image is generated in real-time and labeled for easy identification. The processed outputs are then concatenated horizontally and vertically to form a composite view, which is displayed in a single output window. This approach allows users to visually compare different image transformations simultaneously, providing an effective tool for learning, analysis, and experimentation in image processing.
+                    </p>
+                </div>
+            </div>
+            
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer - Now also serves as the Contact section -->
+    <footer class="footer" id="contact">
+        <h2 class="heading" data-scroll-reveal>Contact <span>Me</span></h2>
+        <div class="social-media" data-scroll-reveal>
+            <a href="https://www.linkedin.com/in/akshayaaysu/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="kaviyaakshaya2424@gmail.com"><i class="fa-solid fa-envelope"></i></a>
+        </div>
+        <p>&copy; 2025 Kaviya Akshaya | All Rights Reserved</p>
+    </footer>
+
+    <!-- ScrollReveal CDN for animations -->
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // ScrollReveal Initialization
+            ScrollReveal({ 
+                distance: '80px',
+                duration: 2000,
+                delay: 200
+            });
+            ScrollReveal().reveal('[data-scroll-reveal]', { origin: 'bottom' });
+
+            // Dark Mode Toggle
+            const themeToggle = document.getElementById('theme-toggle');
+            const body = document.body;
+
+            themeToggle.addEventListener('click', () => {
+                const currentTheme = body.getAttribute('data-theme');
+                if (currentTheme === 'dark') {
+                    body.setAttribute('data-theme', 'light');
+                    themeToggle.querySelector('i').classList.remove('fa-sun');
+                    themeToggle.querySelector('i').classList.add('fa-moon');
+                } else {
+                    body.setAttribute('data-theme', 'dark');
+                    themeToggle.querySelector('i').classList.remove('fa-moon');
+                    themeToggle.querySelector('i').classList.add('fa-sun');
+                }
+            });
+            
+            // Active Link Highlighting on Scroll
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.navbar a');
+
+            window.addEventListener('scroll', () => {
+                sections.forEach(sec => {
+                    const top = window.scrollY;
+                    const offset = sec.offsetTop - 150;
+                    const height = sec.offsetHeight;
+                    const id = sec.getAttribute('id');
+
+                    if (top >= offset && top < offset + height) {
+                        navLinks.forEach(link => {
+                            link.classList.remove('active');
+                            document.querySelector(`.navbar a[href*=${id}]`).classList.add('active');
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
