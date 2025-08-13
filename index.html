@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kaviya Akshaya</title>
+    
+    <!-- Google Font for a clean, professional look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* CSS to create the clean, animated design */
+        :root {
+            --bg-color: #f0f4f8; /* A very light gray, almost white */
+            --second-bg-color: #ffffff;
+            --text-color: #2c3e50; /* Darker text for better contrast */
+            --accent-color: #3498db; /* A vibrant blue for a modern feel */
+            --footer-bg: #e2e6ea;
+            --link-color: #2c3e50;
+        }
+
+        /* Dark Mode theme */
+        body[data-theme='dark'] {
+            --bg-color: #1a202c; /* Darker charcoal */
+            --second-bg-color: #2d3748; /* Dark gray for cards */
+            --text-color: #e2e8f0;
+            --accent-color: #63b3ed; /* Lighter blue to pop on dark background */
+            --footer-bg: #11151a;
+            --link-color: #e2e8f0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            text-decoration: none;
+            outline: none;
+            border: none;
+            scroll-behavior: smooth;
+        }
+
+        html {
+            font-size: 62.5%;
+            overflow-x: hidden;
+        }
+
+        body {
+            background: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+        
+        .heading {
+            font-size: 4.5rem;
+            margin-bottom: 5rem;
+            position: relative;
+        }
+
+        .heading::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -10px;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--accent-color);
+            border-radius: 2px;
+        }
+
+        section {
+            min-height: 100vh;
+            padding: 10rem 9% 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        /* Header & Navigation */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 2rem 9%;
+            background: var(--second-bg-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: background-color 0.5s ease, padding 0.3s ease;
+        }
+        
+        .header.scrolled {
+            padding: 1.5rem 9%;
+        }
+
+        .logo {
+            font-size: 2.8rem;
+            color: var(--text-color);
+            font-weight: 700;
+            transition: color 0.3s ease;
+        }
+        .logo:hover {
+            color: var(--accent-color);
+        }
+
+        .navbar a {
+            font-size: 1.8rem;
+            color: var(--text-color);
+            font-weight: 500;
+            margin-left: 3.5rem;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .navbar a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+        
+        .navbar a:hover::after,
+        .navbar a.active::after {
+            width: 100%;
+        }
+
+        .theme-toggle {
+            cursor: pointer;
+            font-size: 2.5rem;
+            color: var(--text-color);
+            margin-left: 2rem;
+            transition: color 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            color: var(--accent-color);
+        }
+        
+        .container {
+            max-width: 1100px;
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0 2rem;
+        }
+
+        /* Home Section */
+        #home {
+            background: linear-gradient(135deg, var(--bg-color) 0%, var(--second-bg-color) 100%);
+        }
+        
+        .hero-content h1 {
+            font-size: 6.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+            color: var(--text-color);
+        }
+        
+        .hero-content h1 span {
+            color: var(--accent-color);
+        }
+        
+        .animated-text {
+            font-size: 3.5rem;
+            font-weight: 500;
+            color: var(--text-color);
+            margin-top: 1rem;
+            min-height: 40px; /* Prevents layout shift */
+        }
+
+        .animated-text span {
+            color: var(--accent-color);
+            position: relative;
+        }
+
+        @keyframes typing {
+            0%, 20% { content: 'Developer'; }
+            21%, 40% { content: 'Designer'; }
+            41%, 60% { content: 'Problem Solver'; }
+            61%, 80% { content: 'Creator'; }
+            81%, 100% { content: 'Innovator'; }
+        }
+
+        .animated-text span::after {
+            content: '';
+            animation: typing 10s infinite;
+        }
+        
+        .hero-content p {
+            font-size: 1.8rem;
+            margin-top: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            background: var(--accent-color);
+            border-radius: 4rem;
+            box-shadow: 0 0 1rem var(--accent-color);
+            font-size: 1.6rem;
+            color: var(--second-bg-color);
+            letter-spacing: .1rem;
+            font-weight: 600;
+            margin-top: 3rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 2rem rgba(52, 152, 219, 0.5);
+        }
+
+        /* About Section */
+        #about {
+            background-color: var(--second-bg-color);
+        }
+        
+        .about-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6rem;
+            text-align: left;
+        }
+        
+        .about-img {
+            flex-shrink: 0;
+        }
+
+        .about-img img {
+            width: 220px;
+            height: 350px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 5px solid var(--accent-color);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .about-text {
+            max-width: 600px;
+        }
+        
+        .about-text p {
+            font-size: 1.8rem;
+            margin-top: 1rem;
+        }
+        
+        /* Education Section */
+        #education {
+            background-color: var(--bg-color);
+        }
+        
+        .education-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            width: 100%;
+            max-width: 800px;
+        }
+        
+        .education-item {
+            background: var(--second-bg-color);
+            padding: 3rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            text-align: left;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .education-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        
+        .education-item h3 {
+            font-size: 2.2rem;
+            color: var(--accent-color);
+        }
+        
+        .education-item p {
+            font-size: 1.6rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Skills Section */
+        #skills {
+            background-color: var(--second-bg-color);
+        }
+        
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 3rem;
+            text-align: center;
+            max-width: 900px;
+            width: 100%;
+        }
+        
+        .skill-item {
+            background: var(--bg-color);
+            padding: 3rem;
+            border-radius: 1.5rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .skill-item:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        
+        .skill-item i {
+            font-size: 6rem;
+            color: var(--accent-color);
+        }
+        
+        .skill-item h3 {
+            font-size: 2rem;
+            margin-top: 1rem;
+        }
+
+        /* Projects Section */
+        #projects {
+            background-color: var(--bg-color);
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+        }
+        
+        .project-card {
+            background: var(--second-bg-color);
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        
+        .project-card img {
+            width: 50%;
+            height: 250px;
+            object-fit: cover;
+        }
+        
+        .project-content {
+            padding: 2.5rem;
+            text-align: left;
+        }
+        
+        .project-content h3 {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+        
+        .project-content p {
+            font-size: 1.6rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 4rem 9%;
+            background-color: var(--footer-bg);
+            text-align: center;
+            font-size: 1.6rem;
+            color: var(--link-color);
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+        
+        .footer .social-media {
+            margin-bottom: 2rem;
+        }
+        
+        .footer .social-media a {
+            font-size: 3rem;
+            margin: 0 1rem;
+            color: var(--link-color);
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+        
+        .footer .social-media a:hover {
+            color: var(--accent-color);
+            transform: scale(1.2);
+        }
+        
+        /* Scroll Reveal Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(80px);
+            transition: opacity 1s ease, transform 1s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 991px) {
+            html {
+                font-size: 55%;
+            }
+            .about-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 4rem;
+            }
+            .about-text {
+                margin-top: 2rem;
+            }
+            .header {
+                padding: 2rem 5%;
+            }
+        }
+        
+        @media (max-width: 768px) {
+             .navbar {
+                 display: none; /* Hide navbar on smaller screens for now */
+             }
+        }
+    </style>
+</head>
+<body data-theme="light">
+
+    <!-- Header Section -->
+    <header class="header">
+        <a href="#home" class="logo">Kaviya Akshaya</a>
+        <nav class="navbar">
+            <a href="#home" class="active">Home</a>
+            <a href="#about">About</a>
+            <a href="#education">Education</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+        </nav>
+        <div id="theme-toggle" class="theme-toggle">
+            <i class="fas fa-moon"></i>
+        </div>
+    </header>
+
+    <!-- Home Section -->
+    <section id="home">
+        <div class="container hero-content" data-scroll-reveal>
+            <h1>Hi, I'm <span>Kaviya Akshaya</span></h1>
+            <p class="animated-text">I'm a <span></span></p>
+            <a href="Resume.pdf" class="btn">Download CV</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <h2 class="heading" data-scroll-reveal>About <span>Me</span></h2>
+        <div class="container about-content">
+            <div class="about-img" data-scroll-reveal>
+                <img src="Profile.jpg" alt="Your Photo">
+            </div>
+            <div class="about-text" data-scroll-reveal>
+                <p>
+                    I am a final-year BCA student at G. Venkataswamy Naidu College and currently pursuing a full-stack internship at Avaami Technologies. I am maintaining an academic score of 80% and possess strong knowledge of programming languages and design skills.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education">
+        <h2 class="heading" data-scroll-reveal><span>EDUCATION</span></h2>
+        <div class="container education-list">
+            <div class="education-item" data-scroll-reveal>
+                <h3>BCA</h3>
+                <p>I am currently pursuing my Bachelor of Computer Applications (BCA) at G. Venkataswamy Naidu College, Kovilpatti, for the academic period 2023–2025. Throughout my course, I have maintained a consistent academic performance with an aggregate score of 80%.</p>
+            </div>
+            <div class="education-item" data-scroll-reveal>
+                <h3>Senior Secondary School (HSC)</h3>
+                <p>I completed my Higher Secondary education at Vellayan Chettiyar Higher Secondary School, Chennai, during the academic period 2021–2023, achieving an overall score of 70%. During this period, I developed a strong foundation in computer science and mathematics, which enhanced my analytical and problem-solving skills. I also participated in various academic and extracurricular activities, which helped improve my teamwork and leadership abilities.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+<section id="skills">
+        <h2 class="heading" data-scroll-reveal><span>Skills</span></h2>
+        <div class="container skills-grid">
+            <div class="skill-item" data-scroll-reveal>
+                <i class="fab fa-react"></i>
+                <h3>React</h3>
+            </div>
+            <div class="skill-item" data-scroll-reveal>
+                <i class="fas fa-palette"></i>
+                <h3>Canva</h3>
+            </div>
+            <div class="skill-item" data-scroll-reveal>
+                <i class="fab fa-html5"></i>
+                <h3>HTML</h3>
+            </div>
+            <div class="skill-item" data-scroll-reveal>
+                <i class="fab fa-java"></i>
+                <h3>Java</h3>
+            </div>
+            <div class="skill-item" data-scroll-reveal>
+                <i class="fab fa-js-square"></i>
+                <h3>JavaScript</h3>
+            </div>
+            <div class="skill-item" data-scroll-reveal>
+                <i class="fas fa-fire"></i>
+                <h3>Firebase</h3>
+            </div>
+            <!-- Updated icon for Ms-Office -->
+            <div class="skill-item" data-scroll-reveal>
+                <i class="fa-solid fa-file-word"></i>
+                <h3>Ms-Office</h3>
+            </div>
+            <!-- Updated icon for Google Sites -->
+            <div class="skill-item" data-scroll-reveal>
+                <i class="fa-solid fa-sitemap"></i>
+                <h3>Google Sites</h3>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <h2 class="heading" data-scroll-reveal><span>PROJECTS</span></h2>
+        <div class="container projects-grid">
+            <div class="project-card" data-scroll-reveal>
+                <img src="Business Connect Logo.png" alt="Business Connect Logo">
+                <div class="project-content">
+                    <h3>Business Connect</h3>
+                    <p>
+                        Business Connect is a modern web platform that connects individuals, small businesses, and local organizations for job postings, ads, and professional networking. Designed for all users, it offers an easy-to-use interface with secure Firebase Authentication (email/password or Google). Users can create and update profiles with details like About, Experience, Education, Skills, and resumes, plus customize banners and photos. Job and ad posts update in real-time via Firebase Firestore. Built with React.js for a responsive, modular UI and powered by Firebase for backend services, Business Connect is a scalable, lightweight tool for building professional identity and discovering opportunities across all sectors.
+                    </p>
+                </div>
+            </div>
+            <div class="project-card" data-scroll-reveal>
+                <img src="Image.png" alt="Project 2">
+                <div class="project-content">
+                    <h3>Image Processing and Analysis System</h3>
+                    <p>
+                        The proposed system is an Image Processing and Analysis System that demonstrates the application of multiple image processing techniques in a single platform. The system takes an input image and processes it using methods such as grayscale conversion, thresholding, edge detection, Gaussian blurring, and histogram equalization. Each processed image is generated in real-time and labeled for easy identification. The processed outputs are then concatenated horizontally and vertically to form a composite view, which is displayed in a single output window. This approach allows users to visually compare different image transformations simultaneously, providing an effective tool for learning, analysis, and experimentation in image processing.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer - Now also serves as the Contact section -->
+    <footer class="footer" id="contact">
+        <h2 class="heading" data-scroll-reveal>Contact <span></span></h2>
+        <div class="social-media" data-scroll-reveal>
+            <a href="https://www.linkedin.com/in/akshayaaysu/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://github.com/KAVIYA0108" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="mailto:kaviyaakshaya2424@gmail.com"><i class="fa-solid fa-envelope"></i></a>
+        </div>
+        <p>&copy; 2025 Kaviya Akshaya | All Rights Reserved</p>
+    </footer>
+
+    <!-- ScrollReveal CDN for animations -->
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // ScrollReveal Initialization
+            ScrollReveal({ 
+                distance: '80px',
+                duration: 2000,
+                delay: 200
+            });
+            ScrollReveal().reveal('[data-scroll-reveal]', { origin: 'bottom' });
+
+            // Dark Mode Toggle
+            const themeToggle = document.getElementById('theme-toggle');
+            const body = document.body;
+
+            themeToggle.addEventListener('click', () => {
+                const currentTheme = body.getAttribute('data-theme');
+                if (currentTheme === 'dark') {
+                    body.setAttribute('data-theme', 'light');
+                    themeToggle.querySelector('i').classList.remove('fa-sun');
+                    themeToggle.querySelector('i').classList.add('fa-moon');
+                } else {
+                    body.setAttribute('data-theme', 'dark');
+                    themeToggle.querySelector('i').classList.remove('fa-moon');
+                    themeToggle.querySelector('i').classList.add('fa-sun');
+                }
+            });
+            
+            // Active Link Highlighting on Scroll
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.navbar a');
+            const header = document.querySelector('.header');
+
+            window.addEventListener('scroll', () => {
+                // Header shrink on scroll
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+
+                sections.forEach(sec => {
+                    const top = window.scrollY;
+                    const offset = sec.offsetTop - 150;
+                    const height = sec.offsetHeight;
+                    const id = sec.getAttribute('id');
+
+                    if (top >= offset && top < offset + height) {
+                        navLinks.forEach(link => {
+                            link.classList.remove('active');
+                            document.querySelector(`.navbar a[href*=${id}]`).classList.add('active');
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
